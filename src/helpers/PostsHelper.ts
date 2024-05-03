@@ -5,7 +5,7 @@ export type Post = {
   body: string;
 };
 
-export const fetchPosts = async (page: number = 7, page_size: number = 10) => {
+export const fetchPosts = async (page: number = 1, page_size: number = 20) => {
   const request_options = {
     method: 'GET',
   };

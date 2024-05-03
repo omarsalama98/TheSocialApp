@@ -7,6 +7,9 @@ export const HomeStyles = StyleSheet.create({
   separator: {
     height: 7,
   },
+  loading_container: {
+    minHeight: 60,
+  },
 });
 
 export const PostStyles = StyleSheet.create({

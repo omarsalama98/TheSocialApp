@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Post as PostType} from '../helpers/PostsHelper';
 import {
@@ -9,10 +9,11 @@ import {
 } from '../helpers/UsersHelper';
 import {PostStyles} from '../styles/HomeScreenStyles';
 
-export default function Post(props: {post: PostType; navigation: any}) {
+const Post = (props: {post: PostType; navigation: any}) => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
+    // console.log(props.post.user_id);
     fetchUserDetails(props.post.user_id)
       .then(result => {
         if (result?.success === true && result.data !== undefined) {
@@ -49,4 +50,6 @@ export default function Post(props: {post: PostType; navigation: any}) {
       </View>
     </TouchableOpacity>
   ) : null;
-}
+};
+
+export default memo(Post);
