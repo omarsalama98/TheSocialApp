@@ -10,6 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from 'react-native-splash-screen';
 import HomeScreen from './src/HomeScreen';
+import PostDetailsScreen from './src/PostDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +21,9 @@ function App(): React.JSX.Element {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="PostDetails" component={PostDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
