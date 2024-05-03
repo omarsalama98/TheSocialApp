@@ -4,8 +4,9 @@ import {Post as PostType, fetchPosts} from './helpers/PostsHelper';
 import Post from './components/Post';
 import VerticalSeparator from './components/VerticalSeparator';
 import {HomeStyles} from './styles/HomeScreenStyles';
+import Loading from './components/Loading';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}: any) {
   const [posts, setPosts] = useState<PostType[] | undefined>(undefined);
 
   useEffect(() => {
@@ -15,13 +16,16 @@ export default function HomeScreen() {
       }
     });
   });
+
   return posts !== undefined ? (
     <SafeAreaView style={HomeStyles.container}>
       <FlatList
         data={posts}
-        renderItem={({item}) => <Post post={item} />}
+        renderItem={({item}) => <Post post={item} navigation={navigation} />}
         ItemSeparatorComponent={VerticalSeparator}
       />
     </SafeAreaView>
-  ) : null;
+  ) : (
+    <Loading />
+  );
 }

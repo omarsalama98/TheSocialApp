@@ -1,37 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Post as PostType} from '../helpers/PostsHelper';
-import {User, fetchUserDetails} from '../helpers/UsersHelper';
+import {
+  User,
+  fetchUserDetails,
+  getResourceFileName,
+  unknown_user,
+} from '../helpers/UsersHelper';
 import {PostStyles} from '../styles/HomeScreenStyles';
 
-export default function Post(props: {post: PostType}) {
+export default function Post(props: {post: PostType; navigation: any}) {
   const [user, setUser] = useState<User | undefined>(undefined);
-
-  const unknown_user: User = {
-    id: 0,
-    name: 'Unknown User',
-    email: 'unknown@e.co',
-    gender: 'unknown',
-    status: 'away',
-  };
-
-  const getResourceFileName = (cur_user: User) => {
-    if (cur_user.gender === 'male') {
-      if (cur_user.id % 2 === 0) {
-        return require('../assets/male_1.png');
-      } else {
-        return require('../assets/male_2.png');
-      }
-    } else if (cur_user.gender === 'female') {
-      if (cur_user.id % 2 === 0) {
-        return require('../assets/female_1.png');
-      } else {
-        return require('../assets/female_2.png');
-      }
-    } else {
-      return require('../assets/unknown.png');
-    }
-  };
 
   useEffect(() => {
     fetchUserDetails(props.post.user_id)
@@ -45,11 +24,18 @@ export default function Post(props: {post: PostType}) {
       .catch(() => {
         setUser(unknown_user);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.post.user_id]);
 
   return user !== undefined ? (
-    <View style={PostStyles.container}>
+    <TouchableOpacity
+      style={PostStyles.container}
+      disabled={props.navigation === undefined}
+      onPress={() => {
+        props.navigation.navigate('PostDetails', {
+          post: props.post,
+          user: user,
+        });
+      }}>
       <View style={PostStyles.user_headline_container}>
         <Image
           source={getResourceFileName(user)}
@@ -61,6 +47,6 @@ export default function Post(props: {post: PostType}) {
         <Text style={PostStyles.post_title}>{props.post.title}</Text>
         <Text style={PostStyles.post_body}>{props.post.body}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   ) : null;
 }

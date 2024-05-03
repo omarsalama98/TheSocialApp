@@ -40,3 +40,45 @@ export const fetchUserDetails = async (user_id: number) => {
       return {success: false, data: undefined, error: error};
     });
 };
+
+export const unknown_user: User = {
+  id: 0,
+  name: 'Unknown User',
+  email: 'unknown@e.co',
+  gender: 'unknown',
+  status: 'away',
+};
+
+export const getResourceFileName = (cur_user: User) => {
+  if (cur_user.gender === 'male') {
+    if (cur_user.id % 2 === 0) {
+      return require('../assets/male_1.png');
+    } else {
+      return require('../assets/male_2.png');
+    }
+  } else if (cur_user.gender === 'female') {
+    if (cur_user.id % 2 === 0) {
+      return require('../assets/female_1.png');
+    } else {
+      return require('../assets/female_2.png');
+    }
+  } else {
+    return require('../assets/unknown.png');
+  }
+};
+
+export const getRandomResourceFileName = () => {
+  const random_int = Math.floor(Math.random() * 4);
+  switch (random_int) {
+    case 0:
+      return require('../assets/male_1.png');
+    case 1:
+      return require('../assets/male_2.png');
+    case 2:
+      return require('../assets/female_1.png');
+    case 3:
+      return require('../assets/female_2.png');
+    default:
+      return require('../assets/unknown.png');
+  }
+};
