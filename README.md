@@ -1,5 +1,15 @@
-# Getting Started
+# The Social APP
 
+## A Social media mini-app
+
+
+
+ <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/splash.png" alt="Splash" width="200" height="400"> | <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/home.png" alt="Home" width="200" height="400"> | <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/home_load_more.png" alt="Splash" width="200" height="400">
+ 
+ <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/comments_0.png" alt="Splash" width="200" height="400"> | <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/comments_1.png" alt="Splash" width="200" height="400"> | <img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/comments_2.png" alt="Splash" width="200" height="400">
+
+<img src="https://github.com/omarsalama98/TheSocialApp/blob/main/misc/android.gif" width="300" height="500">
+ 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
