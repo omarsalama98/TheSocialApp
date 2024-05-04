@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView, View} from 'react-native';
-import {Post as PostType, fetchPosts} from './helpers/PostsHelper';
+import {UserPost, fetchPosts} from './helpers/PostsHelper';
 import Post from './components/Post';
 import VerticalSeparator from './components/VerticalSeparator';
 import {HomeStyles} from './styles/HomeScreenStyles';
 import Loading from './components/Loading';
 
 export default function HomeScreen({navigation}: any) {
-  const [posts, setPosts] = useState<PostType[] | undefined>(undefined);
+  const [posts, setPosts] = useState<UserPost[] | undefined>(undefined);
   const [last_loaded_page, setLastLoadedPage] = useState<number>(1);
   const [on_scroll_end, setOnScrollEnd] = useState<boolean>(false);
   const [loading_next_page, setLoadingNextPage] = useState<boolean>(false);

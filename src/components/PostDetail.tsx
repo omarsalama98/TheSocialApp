@@ -1,11 +1,12 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {Post as PostType} from '../helpers/PostsHelper';
-import {User, getResourceFileName} from '../helpers/UsersHelper';
+import {UserPost} from '../helpers/PostsHelper';
+import {getResourceFileName} from '../helpers/UsersHelper';
 import {PostStyles} from '../styles/HomeScreenStyles';
 
-export default function PostDetail(props: {post: PostType; user: User}) {
-  const {user, post} = props;
+export default function PostDetail(props: {post: UserPost}) {
+  const {post} = props;
+  const user = post.user;
 
   return user !== undefined ? (
     <View style={PostStyles.container}>

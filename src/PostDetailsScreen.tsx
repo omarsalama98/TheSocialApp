@@ -7,14 +7,12 @@ import {
   fetchPostComments,
 } from './helpers/CommentsHelper';
 import {PostDetailsStyles} from './styles/PostDetailsScreenStyles';
-import {Post as PostType} from './helpers/PostsHelper';
+import {UserPost} from './helpers/PostsHelper';
 import Loading from './components/Loading';
-import {User} from './helpers/UsersHelper';
 import PostDetail from './components/PostDetail';
 
 export default function PostDetailsScreen({route}: any) {
-  const post: PostType = route.params.post;
-  const user: User = route.params.user;
+  const post: UserPost = route.params.post;
   const [comments, setComments] = useState<CommentType[]>();
 
   useEffect(() => {
@@ -27,7 +25,7 @@ export default function PostDetailsScreen({route}: any) {
 
   return (
     <SafeAreaView style={PostDetailsStyles.container}>
-      <PostDetail post={post} user={user} />
+      <PostDetail post={post} />
       <View style={PostDetailsStyles.separator} />
       {comments !== undefined ? (
         comments.length === 0 ? (
