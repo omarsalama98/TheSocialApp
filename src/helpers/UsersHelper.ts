@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export type User = {
   id: number;
   name: string;
@@ -6,7 +8,42 @@ export type User = {
   status: 'active' | 'inactive' | 'away';
 };
 
+export const unknown_user: User = {
+  id: 0,
+  name: 'Unknown User',
+  email: 'unknown@e.co',
+  gender: 'unknown',
+  status: 'away',
+};
+
+const storeUserData = async (user: User) => {
+  try {
+    const json_value = JSON.stringify(user);
+    await AsyncStorage.setItem(user.id.toString(), json_value);
+  } catch (e) {
+    console.error('Error saving user data', user.id, e);
+  }
+};
+
+const getUserData = async (user_id: string) => {
+  try {
+    const json_value = await AsyncStorage.getItem(user_id);
+    return json_value != null ? JSON.parse(json_value) : null;
+  } catch (e) {
+    console.error('Error saving user data', user_id, e);
+    return null;
+  }
+};
+
 export const fetchUserDetails = async (user_id: number) => {
+  const user: User = await getUserData(user_id.toString());
+  if (user !== null) {
+    return {
+      success: true,
+      data: user,
+      error: undefined,
+    };
+  }
   const request_options = {
     method: 'GET',
   };
@@ -18,6 +55,7 @@ export const fetchUserDetails = async (user_id: number) => {
     .then(async (response: Response) => {
       if (response.status === 200) {
         return response.json().then((result: User) => {
+          storeUserData(result);
           return {
             success: true,
             data: result,
@@ -28,6 +66,7 @@ export const fetchUserDetails = async (user_id: number) => {
         return response
           .text()
           .then(text => {
+            storeUserData(unknown_user);
             return {success: false, data: undefined, error: text};
           })
           .catch(error => {
@@ -39,14 +78,6 @@ export const fetchUserDetails = async (user_id: number) => {
       console.error(error);
       return {success: false, data: undefined, error: error};
     });
-};
-
-export const unknown_user: User = {
-  id: 0,
-  name: 'Unknown User',
-  email: 'unknown@e.co',
-  gender: 'unknown',
-  status: 'away',
 };
 
 export const getResourceFileName = (cur_user: User) => {

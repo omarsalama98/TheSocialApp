@@ -13,7 +13,6 @@ const Post = (props: {post: PostType; navigation: any}) => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
-    // console.log(props.post.user_id);
     fetchUserDetails(props.post.user_id)
       .then(result => {
         if (result?.success === true && result.data !== undefined) {
