@@ -58,14 +58,3 @@ This is one way to run your app — you can also run it directly from within And
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-
-
-# Time Taken
-
-## Setup, App icon and Splash Screen (3-4 hours)
-
-## Home Screen (2 hours)
-
-## Post Details Screen (2 hours)
-
-## Optimizations and Performance enhancement (3 hours)
